@@ -3,7 +3,6 @@ import json
 
 
 def prompt(mood):
-    # Updated URL to match OpenRouter's current API endpoint
     url = "https://openrouter.ai/api/v1/chat/completions"
 
     headers = {
@@ -13,7 +12,6 @@ def prompt(mood):
         "X-Title": "Mood Playlist Generator"
     }
 
-    # Add the data_policy parameter as mentioned in the error
     payload = {
         "model": "deepseek/deepseek-chat-v3-0324:free",
         "messages": [
@@ -22,8 +20,8 @@ def prompt(mood):
                 "content": f"Create a Spotify playlist for {mood} mood."
             }
         ],
-        "route": "fallback",  # Try using a fallback route
-        "transforms": ["middle"],  # Use middle transformation for prompts
+        "route": "fallback",
+        "transforms": ["middle"],
     }
 
     try:
@@ -31,9 +29,16 @@ def prompt(mood):
         response.raise_for_status()
 
         data = response.json()
+
+
+
         playlist_content = data["choices"][0]["message"]["content"]
-        print(f"Playlist for {mood} mood:")
-        print(playlist_content)
+        tracks = playlist_content.split("\n")
+        with open('response_data.json', 'w') as json_file:
+            json.dump(tracks, json_file, indent=4)
+
+        for track in tracks:
+            print(track)
         return playlist_content
 
     except requests.exceptions.RequestException as e:
@@ -45,4 +50,4 @@ def prompt(mood):
 
 
 # Test the function
-prompt("bad")
+prompt("sad")
