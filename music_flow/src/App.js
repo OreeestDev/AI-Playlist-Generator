@@ -7,7 +7,7 @@ import MoodGrid from './components/MoodCard/MoodGrid';
 
 export default function App() {
   return (
-      <div> 
+      <div>
 
 {/* <Button> */}
 
