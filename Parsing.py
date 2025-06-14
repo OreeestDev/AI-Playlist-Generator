@@ -1,11 +1,12 @@
 import json
+from Promts import prompt
 
+playlist_content = prompt("Make a plalist for sad mood")
 
 def parse_playlist():
 
-    with open('response_data.json', 'r') as json_file:
-        data = json.load(json_file)
 
+    data = playlist_content
 
     tracks = []
 
@@ -64,7 +65,7 @@ def parse_playlist():
 
 
 
-parse_playlist()
+
 
 
 
