@@ -1,0 +1,4 @@
+flask
+requests
+deezer-python
+python-dotenv
